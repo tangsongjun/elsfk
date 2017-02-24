@@ -1,0 +1,70 @@
+[
+    {
+        "outputFile": "/Users/song/work/enjoy/Blockinger1/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v11/values-v11.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 4,
+                    "endColumn": 12,
+                    "endOffset": 181
+                },
+                "from": {
+                    "file": "/Users/song/work/enjoy/Blockinger1/app/src/main/res/values-v11/styles.xml",
+                    "position": {
+                        "startLine": 46,
+                        "startColumn": 4,
+                        "startOffset": 1768,
+                        "endLine": 48,
+                        "endColumn": 12,
+                        "endOffset": 1896
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 186,
+                    "endLine": 7,
+                    "endColumn": 12,
+                    "endOffset": 345
+                },
+                "from": {
+                    "file": "/Users/song/work/enjoy/Blockinger1/app/src/main/res/values-v11/styles.xml",
+                    "position": {
+                        "startLine": 58,
+                        "startColumn": 4,
+                        "startOffset": 2351,
+                        "endLine": 60,
+                        "endColumn": 12,
+                        "endOffset": 2512
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 350,
+                    "endLine": 14,
+                    "endColumn": 12,
+                    "endOffset": 783
+                },
+                "from": {
+                    "file": "/Users/song/work/enjoy/Blockinger1/app/src/main/res/values-v11/styles.xml",
+                    "position": {
+                        "startLine": 50,
+                        "startColumn": 4,
+                        "startOffset": 1904,
+                        "endLine": 56,
+                        "endColumn": 12,
+                        "endOffset": 2343
+                    }
+                }
+            }
+        ]
+    }
+]
