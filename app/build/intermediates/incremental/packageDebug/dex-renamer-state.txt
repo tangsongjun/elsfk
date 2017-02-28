@@ -1,7 +1,0 @@
-#Mon Feb 27 16:11:07 CST 2017
-base.0=/Users/song/work/enjoy/Blockinger1/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_ce19338fb9873139445d8d27424ff47c7f60fa2b
-renamed.1=classes2.dex
-renamed.0=classes.dex
-file.1=/Users/song/work/enjoy/Blockinger1/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_5b720a2d214a44b32ef59c2d155a0d41d045f831/classes.dex
-base.1=/Users/song/work/enjoy/Blockinger1/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_5b720a2d214a44b32ef59c2d155a0d41d045f831
-file.0=/Users/song/work/enjoy/Blockinger1/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_ce19338fb9873139445d8d27424ff47c7f60fa2b/classes.dex
