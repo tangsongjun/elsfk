@@ -5,7 +5,7 @@ android {
     buildToolsVersion "24.0.3"
 
     defaultConfig {
-        applicationId "org.blockinger.game"
+        applicationId "com.song.blockinger.game"
         minSdkVersion 8
         targetSdkVersion 17
     }
