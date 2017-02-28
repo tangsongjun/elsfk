@@ -4,7 +4,9 @@
 /.idea/workspace.xml
 /.idea/libraries
 .DS_Store
-/build
+app/build/*
 /captures
 .idea
 gradle/*
+/build/*
+app/build/tmp/*
