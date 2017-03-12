@@ -21,15 +21,15 @@
 
     Diese Datei ist Teil von Blockinger.
 
-    Blockinger ist Freie Software: Sie können es unter den Bedingungen
+    Blockinger ist Freie Software: Sie kï¿½nnen es unter den Bedingungen
     der GNU General Public License, wie von der Free Software Foundation,
-    Version 3 der Lizenz oder (nach Ihrer Option) jeder späteren
-    veröffentlichten Version, weiterverbreiten und/oder modifizieren.
+    Version 3 der Lizenz oder (nach Ihrer Option) jeder spï¿½teren
+    verï¿½ffentlichten Version, weiterverbreiten und/oder modifizieren.
 
-    Blockinger wird in der Hoffnung, dass es nützlich sein wird, aber
-    OHNE JEDE GEWÄHELEISTUNG, bereitgestellt; sogar ohne die implizite
-    Gewährleistung der MARKTFÄHIGKEIT oder EIGNUNG FÜR EINEN BESTIMMTEN ZWECK.
-    Siehe die GNU General Public License für weitere Details.
+    Blockinger wird in der Hoffnung, dass es nï¿½tzlich sein wird, aber
+    OHNE JEDE GEWï¿½HELEISTUNG, bereitgestellt; sogar ohne die implizite
+    Gewï¿½hrleistung der MARKTFï¿½HIGKEIT oder EIGNUNG Fï¿½R EINEN BESTIMMTEN ZWECK.
+    Siehe die GNU General Public License fï¿½r weitere Details.
 
     Sie sollten eine Kopie der GNU General Public License zusammen mit diesem
     Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
@@ -61,6 +61,13 @@ import android.widget.Button;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
+import com.google.ads.mediation.AbstractAdViewAdapter;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+
 public class MainActivity extends ListActivity {
 
 	public static final int SCORE_REQUEST = 0x0;
@@ -84,33 +91,36 @@ public class MainActivity extends ListActivity {
 	private SeekBar leveldialogBar;
 	private TextView leveldialogtext;
 	private Sound sound;
-	
+	private AdView mAdView;
+	private InterstitialAd mInterstitialAd;
+	private int mCount;
+	private TextView mHightScore;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		PreferenceManager.setDefaultValues(this, R.xml.simple_preferences, true);
 		PreferenceManager.setDefaultValues(this, R.xml.advanced_preferences, true);
+		mHightScore = (TextView) findViewById(R.id.tv_highest);
 		
 		/* Create Music */
 		sound = new Sound(this);
 		sound.startMusic(Sound.MENU_MUSIC, 0);
 		
 		/* Database Management */
-		Cursor mc;
 	    datasource = new ScoreDataSource(this);
 	    datasource.open();
-	    mc = datasource.getCursor();
 	    // Use the SimpleCursorAdapter to show the
 	    // elements in a ListView
-	    adapter = new SimpleCursorAdapter(
-	    	(Context)this,
-	        R.layout.blockinger_list_item,
-	        mc,
-	        new String[] {HighscoreOpenHelper.COLUMN_SCORE, HighscoreOpenHelper.COLUMN_PLAYERNAME},
-	        new int[] {R.id.text1, R.id.text2},
-	        SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-	    setListAdapter(adapter);
+//	    adapter = new SimpleCursorAdapter(
+//	    	(Context)this,
+//	        R.layout.blockinger_list_item,
+//	        mc,
+//	        new String[] {HighscoreOpenHelper.COLUMN_SCORE, HighscoreOpenHelper.COLUMN_PLAYERNAME},
+//	        new int[] {R.id.text1, R.id.text2},
+//	        SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+//	    setListAdapter(adapter);
 	    
 	    /* Create Startlevel Dialog */
 	    startLevel = 0;
@@ -149,6 +159,51 @@ public class MainActivity extends ListActivity {
 				startActivity(i);
 			}
 		});
+
+		MobileAds.initialize(this, "ca-app-pub-2578664408483782");
+		// Gets the ad view defined in layout/ad_fragment.xml with ad unit ID set in
+		// values/strings.xml.
+		mAdView = (AdView) findViewById(R.id.ad_view);
+
+		// Create an ad request. Check your logcat output for the hashed device ID to
+		// get test ads on a physical device. e.g.
+		// "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
+		AdRequest adRequest = new AdRequest.Builder()
+				.build();
+
+		// Start loading the ad in the background.
+		mAdView.loadAd(adRequest);
+
+
+		// Create the mInterstitialAd.
+		mInterstitialAd = new InterstitialAd(this);
+		mInterstitialAd.setAdUnitId("ca-app-pub-2578664408483782/3907376151");
+
+		mInterstitialAd.setAdListener(new AdListener() {
+			@Override
+			public void onAdClosed() {
+				requestNewInterstitial();
+
+			}
+		});
+
+		requestNewInterstitial();
+
+		setHightScore();
+
+	}
+
+	private void setHightScore() {
+		try {
+
+			Cursor mc= datasource.getCursor();
+			mc.moveToNext();
+			int scoreHighest = mc.getInt(1);
+
+			mHightScore.setText(getResources().getText(R.string.highscore_title) + "ï¼š" + scoreHighest);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -165,13 +220,13 @@ public class MainActivity extends ListActivity {
 				Intent intent = new Intent(this, SettingsActivity.class);
 				startActivity(intent);
 				return true;
-			case R.id.action_about:
-				Intent intent1 = new Intent(this, AboutActivity.class);
-				startActivity(intent1);
-				return true;
-			case R.id.action_donate:
-				donateDialog.show();
-				return true;
+//			case R.id.action_about:
+//				Intent intent1 = new Intent(this, AboutActivity.class);
+//				startActivity(intent1);
+//				return true;
+//			case R.id.action_donate:
+//				donateDialog.show();
+//				return true;
 			case R.id.action_help:
 				Intent intent2 = new Intent(this, HelpActivity.class);
 				startActivity(intent2);
@@ -207,8 +262,32 @@ public class MainActivity extends ListActivity {
 
 	    datasource.open();
 	    datasource.createScore(score, playerName);
+
+		setHightScore();
+
+		if (mInterstitialAd != null && mInterstitialAd.isLoaded() && mCount < 2) {
+			mCount++;
+			mInterstitialAd.show();
+		}
+
 	}
 
+	private void requestNewInterstitial() {
+		AdRequest adRequest = new AdRequest.Builder()
+				.build();
+
+		mInterstitialAd.loadAd(adRequest);
+	}
+
+	public void onClickCrazy(View view) {
+		Intent intent = new Intent(this, GameActivity.class);
+		Bundle b = new Bundle();
+		b.putInt("mode", GameActivity.NEW_GAME); //Your id
+		b.putInt("level", 21); //Your id
+		b.putString("playername", ((TextView)findViewById(R.id.nicknameEditView)).getText().toString()); //Your id
+		intent.putExtras(b); //Put your id to your next Intent
+		startActivityForResult(intent,SCORE_REQUEST);
+	}
 
     public void onClickStart(View view) {
 		dialogView = getLayoutInflater().inflate(R.layout.seek_bar_dialog, null);
@@ -274,9 +353,9 @@ public class MainActivity extends ListActivity {
     	super.onResume();
     	sound.setInactive(false);
     	sound.resume();
-    	datasource.open();
-	    Cursor cursor = datasource.getCursor();
-	    adapter.changeCursor(cursor);
+//    	datasource.open();
+//	    Cursor cursor = datasource.getCursor();
+//	    adapter.changeCursor(cursor);
 	    
 	    if(!GameState.isFinished()) {
 	    	((Button)findViewById(R.id.resumeButton)).setEnabled(true);

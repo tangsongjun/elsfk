@@ -34,123 +34,171 @@
     Sie sollten eine Kopie der GNU General Public License zusammen mit diesem
     Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
   -->
- 
- <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="right"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity" >
+    xmlns:ads="http://schemas.android.com/apk/res-auto">
+
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/ad_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id" />
 
     <LinearLayout
-        android:id="@+id/LinearLayout1"
+        android:id="@+id/LinearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="0.8"
-        android:orientation="vertical" >
+        android:layout_height="match_parent"
+        android:background="@color/holo_grey"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <LinearLayout
+            android:id="@+id/LinearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="0.8"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/highscore_title"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:visibility="gone" />
+
+            <View
+                android:id="@+id/titledivider"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:visibility="gone" />
+
+            <View
+                android:id="@+id/scoredivider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/holo_grey"
+                android:visibility="gone" />
+
+            <ListView
+                android:id="@android:id/list"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/highscoreListDescription"
+                android:visibility="gone"></ListView>
+
+            <View
+                android:id="@+id/hdivider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/holo_grey" />
+
+            <EditText
+                android:id="@+id/nicknameEditView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/playerNameInputFieldHint"
+                android:imeOptions="actionDone"
+                android:inputType="textCapWords"
+                android:singleLine="true"
+                android:visibility="gone"></EditText>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/spacer0"
+            android:layout_width="wrap_content"
+            android:layout_height="5dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/crazybutton"
+                style="@android:style/Widget.ImageWell"
+                android:layout_width="160dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="10dp"
+                android:onClick="onClickCrazy"
+                android:text="@string/crazy_model"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/square_error"
+                android:textColorHint="@color/holo_grey" />
+
+
+            <Button
+                android:id="@+id/restartButton"
+                style="@android:style/Widget.ImageWell"
+                android:layout_width="160dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="10dp"
+                android:onClick="onClickStart"
+                android:text="@string/startButtonString"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/square_error"
+                android:textColorHint="@color/holo_grey" />
+
+
+            <Button
+                android:id="@+id/resumeButton"
+                style="@android:style/Widget.ImageWell"
+                android:layout_width="160dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="50dp"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:onClick="onClickResume"
+                android:text="@string/resumeButtonString"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/holo_grey"
+                android:textColorHint="@color/holo_grey" />
+
+
+            <TextView
+                android:id="@+id/tv_highest"
+                android:layout_width="162dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                tools:text="最高纪录:"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+
+        </LinearLayout>
+
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/TextView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="@string/highscore_title"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:text="@string/musicAuthorNote"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:visibility="gone" />
 
-        <View
-            android:id="@+id/titledivider"
-            android:layout_width="match_parent"
-            android:layout_height="8dp" />
-
-        <View
-            android:id="@+id/scoredivider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/holo_grey" />
-
-        <ListView
-            android:id="@android:id/list"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:contentDescription="@string/highscoreListDescription" >
-        </ListView>
-
-        <View
-            android:id="@+id/hdivider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/holo_grey" />
-
-        <EditText
-            android:id="@+id/nicknameEditView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/playerNameInputFieldHint"
-            android:imeOptions="actionDone"
-            android:inputType="textCapWords"
-            android:singleLine="true" >
-        </EditText>
 
     </LinearLayout>
 
-    <View
-        android:id="@+id/spacer0"
-        android:layout_width="wrap_content"
-        android:layout_height="5dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center" >
-
-        <Button
-            android:id="@+id/resumeButton"
-            style="@android:style/Widget.ImageWell"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center|top"
-            android:layout_weight="1"
-            android:enabled="false"
-            android:onClick="onClickResume"
-            android:text="@string/resumeButtonString"
-            android:textColor="@color/holo_grey" 
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColorHint="@color/holo_grey" />
-
-        <View
-            android:id="@+id/spacer2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.25" />
-
-        <Button
-            android:id="@+id/restartButton"
-            style="@android:style/Widget.ImageWell"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_weight="1"
-            android:onClick="onClickStart"
-            android:text="@string/startButtonString"
-            android:textColor="@color/square_error" 
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColorHint="@color/holo_grey" />
-        
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/TextView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/musicAuthorNote"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-</LinearLayout>
+</FrameLayout>
