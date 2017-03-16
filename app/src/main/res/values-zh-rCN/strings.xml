@@ -206,7 +206,7 @@
     <string name="pref_help_resumability_title">Resumability</string>
     <string name="pref_help_resumability_summary">Under which conditions is an interrupted game resumable?</string>
     <string name="pref_help_resumability_message">The game is resumable from the main screen, if the \"Pause\" button or the native android \"Back\" button was hit.\nThe game is also resumable, if the player switches to another application or the home screen and doesn\'t exit Blockinger.\nThe game will not be resumable, if the \"Exit\" menu entry was hit from the main screen.</string>
-
+    <string name="banner_ad_unit_id">ca-app-pub-2578664408483782/6541806950</string>
 
 
 </resources>

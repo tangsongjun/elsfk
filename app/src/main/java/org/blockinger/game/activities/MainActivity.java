@@ -177,7 +177,7 @@ public class MainActivity extends ListActivity {
 
 		// Create the mInterstitialAd.
 		mInterstitialAd = new InterstitialAd(this);
-		mInterstitialAd.setAdUnitId("ca-app-pub-2578664408483782/3907376151");
+		mInterstitialAd.setAdUnitId("ca-app-pub-2578664408483782/8018540154");
 
 		mInterstitialAd.setAdListener(new AdListener() {
 			@Override
